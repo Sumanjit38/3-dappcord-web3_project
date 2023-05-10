@@ -15,13 +15,23 @@ import Dappcord from './abis/Dappcord.json'
 import config from './config.json';
 
 // Socket
-const socket = io('ws://localhost:3030');
+//const socket = io('ws://localhost:3030');
 
 function App() {
 
+  const loadBlockchainData = async () => {    
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts'})
+    const account = ethers.utils.getAddress(accounts[0])
+    console.log(account)
+  }
+
+  useEffect(() => {
+    loadBlockchainData()
+  }, [])
+
   return (
     <div>
-      <h1 style={{ textAlign: "center", padding: "15px" }}>Welcome to Dappcord</h1>
+      <Navigation />
 
       <main>
 
